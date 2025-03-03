@@ -4,8 +4,8 @@ github.com/alicebob/miniredis/v2 v2.34.0 h1:mBFWMaJSNL9RwdGRyEDoAAv8OQc5UlEhLDQg
 github.com/alicebob/miniredis/v2 v2.34.0/go.mod h1:kWShP4b58T1CW0Y5dViCd5ztzrDqRWqM3nksiyXk5s8=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
-github.com/boj/redistore v1.4.0 h1:PFn5Hcbmj22WGsMKGLaEn33In4+C0lX+txbAOpA3mPA=
-github.com/boj/redistore v1.4.0/go.mod h1:JeLqX+qEEBrjytalj9s+3a7o34lNmYncdPj8HeZRvYk=
+github.com/boj/redistore v1.3.0 h1:2Cz7NezUYeuTLKMxWxKluT3t2enyD/N0eB23Fd1jQk4=
+github.com/boj/redistore v1.3.0/go.mod h1:4Dnw2ZVwtwHFiWfJ7FoHVQ79IYAQakYYNICZmt9xIfI=
 github.com/bsm/ginkgo/v2 v2.12.0 h1:Ny8MWAHyOepLGlLKYmXG4IEkioBysk6GpaRTLC8zwWs=
 github.com/bsm/ginkgo/v2 v2.12.0/go.mod h1:SwYbGRRDovPVboqFv0tPTcG1sN61LM1Z4ARdbAV9g4c=
 github.com/bsm/gomega v1.27.10 h1:yeMWxP2pV2fG3FgAODIY8EiRE3dy0aeFYt4l7wh6yKA=

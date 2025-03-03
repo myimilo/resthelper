@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.23.4
 
 require (
-	github.com/boj/redistore v1.4.0
+	github.com/boj/redistore v1.3.0
 	github.com/golang-jwt/jwt/v4 v4.5.1
 	github.com/gorilla/csrf v1.7.2
 	github.com/gorilla/securecookie v1.1.2
