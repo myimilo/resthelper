@@ -5,10 +5,10 @@ go 1.21
 toolchain go1.23.4
 
 require (
-	github.com/boj/redistore v1.3.0
 	github.com/golang-jwt/jwt/v4 v4.5.1
 	github.com/gorilla/csrf v1.7.2
 	github.com/gorilla/securecookie v1.1.2
+	github.com/gorilla/sessions v1.1.1
 	github.com/zeromicro/go-zero v1.8.1
 )
 
@@ -20,9 +20,7 @@ require (
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/gomodule/redigo v1.9.2 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
-	github.com/gorilla/sessions v1.1.1 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect

@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/boj/redistore"
 	"github.com/myimilo/resthelper"
+	"github.com/myimilo/resthelper/redistore"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
