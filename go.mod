@@ -10,6 +10,7 @@ require (
 	github.com/gorilla/securecookie v1.1.2
 	github.com/gorilla/sessions v1.1.1
 	github.com/zeromicro/go-zero v1.8.1
+	golang.org/x/crypto v0.33.0
 )
 
 require (

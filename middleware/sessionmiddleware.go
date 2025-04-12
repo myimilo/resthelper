@@ -25,9 +25,16 @@ func (m *SessionMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			logx.Error(err)
 		} else {
 			r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeySession, session))
-			if uid, find := session.Values["userid"]; find && uid.(uint) > 0 {
+			if uid, find := session.Values["userId"]; find && uid.(uint) > 0 {
+				r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyUserId, uid.(uint)))
 				logx.Infof("event_active_session, userid: %v", uid)
+			} else {
+				r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyUserId, uint(0)))
+				logx.Info("event_active_session, userid: 0")
 			}
+			r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyCodeId, uint(0)))
+			r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyDeviceId, uint(0)))
+			r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyPlatform, "web"))
 		}
 		next(w, r)
 	}
