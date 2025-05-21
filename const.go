@@ -14,6 +14,6 @@ const (
 )
 
 const (
-	RoleUser  = "user"
-	RoleAdmin = "admin"
+	RoleUser  string = "user"
+	RoleAdmin string = "admin"
 )
