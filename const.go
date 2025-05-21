@@ -10,4 +10,10 @@ const (
 	ContextKeyCodeId
 	ContextKeyDeviceId
 	ContextKeyPlatform
+	ContextKeyUserRole
+)
+
+const (
+	RoleUser  = "user"
+	RoleAdmin = "admin"
 )
