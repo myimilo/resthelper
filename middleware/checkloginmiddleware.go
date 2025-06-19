@@ -46,6 +46,11 @@ func (m *CheckLoginMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		}
 
 		r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeySession, session))
+		if role, find := session.Values["role"]; find && role.(string) != "" {
+			r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyUserRole, role.(string)))
+		} else {
+			r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyUserRole, resthelper.RoleUser))
+		}
 		r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyUserId, userId.(uint)))
 		r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyCodeId, uint(0)))
 		r = r.WithContext(context.WithValue(r.Context(), resthelper.ContextKeyDeviceId, uint(0)))
