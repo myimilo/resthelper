@@ -11,6 +11,7 @@ const (
 	ContextKeyDeviceId
 	ContextKeyPlatform
 	ContextKeyUserRole
+	ContextKeyIP
 )
 
 const (
