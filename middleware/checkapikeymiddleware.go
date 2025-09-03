@@ -20,20 +20,8 @@ func NewCheckApiKeyMiddleware(apiKey string) *CheckApiKeyMiddleware {
 
 func (m *CheckApiKeyMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		apiKey := r.Header.Get("Authorization")
-		if apiKey == "" {
-			httpx.Error(w, errorx.NewError(http.StatusUnauthorized))
-			return
-		}
-
-		fields := strings.Fields(apiKey)
-		if len(fields) != 2 || strings.ToLower(fields[0]) != "bearer" {
-			httpx.Error(w, errorx.NewError(http.StatusUnauthorized))
-			return
-		}
-
-		apiKey = fields[1]
-		if apiKey != m.ApiKey {
+		apiKey := extractApiKey(r)
+		if apiKey == "" || apiKey != m.ApiKey {
 			httpx.Error(w, errorx.NewError(http.StatusUnauthorized))
 			return
 		}
@@ -46,4 +34,21 @@ func (m *CheckApiKeyMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		// Passthrough to next handler if need
 		next(w, r)
 	}
+}
+
+func extractApiKey(r *http.Request) string {
+	// Try X-API-Key header first
+	if apiKey := r.Header.Get("X-API-Key"); apiKey != "" {
+		return apiKey
+	}
+
+	// Try Authorization header with Bearer format
+	if authHeader := r.Header.Get("Authorization"); authHeader != "" {
+		fields := strings.Fields(authHeader)
+		if len(fields) == 2 && strings.ToLower(fields[0]) == "bearer" {
+			return fields[1]
+		}
+	}
+
+	return ""
 }
