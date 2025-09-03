@@ -45,7 +45,7 @@ func (m *CheckBalanceMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc 
 			return
 		}
 
-		if balance < 0 {
+		if balance <= 0 {
 			httpx.Error(w, errorx.NewError(http.StatusPaymentRequired, errorx.WithMessage("Insufficient balance")))
 			return
 		}

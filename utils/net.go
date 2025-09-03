@@ -23,3 +23,20 @@ func GetIP(r *http.Request) string {
 
 	return ""
 }
+
+func ExtractApiKey(r *http.Request) string {
+	// Try X-API-Key header first
+	if apiKey := r.Header.Get("X-API-Key"); apiKey != "" {
+		return apiKey
+	}
+
+	// Try Authorization header with Bearer format
+	if authHeader := r.Header.Get("Authorization"); authHeader != "" {
+		fields := strings.Fields(authHeader)
+		if len(fields) == 2 && strings.ToLower(fields[0]) == "bearer" {
+			return fields[1]
+		}
+	}
+
+	return ""
+}
