@@ -32,14 +32,20 @@ func (m *CheckUserApiKeyMiddleware) Handle(next http.HandlerFunc) http.HandlerFu
 	return func(w http.ResponseWriter, r *http.Request) {
 		apiKey := utils.ExtractApiKey(r)
 		if apiKey == "" {
-			httpx.Error(w, errorx.NewError(http.StatusUnauthorized))
+			httpx.Error(w, errorx.NewError(http.StatusUnauthorized, errorx.WithMessage("API key is required")))
 			return
+		}
+
+		apiKeyForLogging := apiKey
+		if len(apiKeyForLogging) > 8 {
+			apiKeyForLogging = apiKeyForLogging[:8] + "***"
 		}
 
 		// Get user ID from API key mapping
 		userId, err := m.getUserIdFromApiKey(apiKey)
 		if err != nil || userId == 0 {
-			httpx.Error(w, errorx.NewError(http.StatusUnauthorized))
+			logx.Errorf("event_check_apikey_get_user_id_from_redis, apiKey: %s, err: %v", apiKeyForLogging, err)
+			httpx.Error(w, errorx.NewError(http.StatusUnauthorized, errorx.WithMessage("Invalid API key")))
 			return
 		}
 
@@ -62,9 +68,9 @@ func (m *CheckUserApiKeyMiddleware) Handle(next http.HandlerFunc) http.HandlerFu
 				return
 			}
 
-			logx.Infof("event_check_apikey_balance, apiKey: %s, userId: %v, balance: %v", apiKey[:8]+"***", userId, balance)
+			logx.Infof("event_check_apikey_balance, apiKey: %s, userId: %v, balance: %v", apiKeyForLogging, userId, balance)
 		} else {
-			logx.Infof("event_check_apikey, apiKey: %s, userId: %v", apiKey[:8]+"***", userId)
+			logx.Infof("event_check_apikey, apiKey: %s, userId: %v", apiKeyForLogging, userId)
 		}
 
 		// Set user context for downstream handlers
