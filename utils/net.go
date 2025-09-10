@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"net"
 	"net/http"
 	"strings"
 )
@@ -10,9 +11,10 @@ func GetIP(r *http.Request) string {
 		if ip := r.Header.Get("X-Real-Ip"); ip != "" {
 			return ip
 		}
-		pieces := strings.SplitN(r.RemoteAddr, ":", 2)
-		if len(pieces) >= 1 {
-			return pieces[0]
+		if ip, _, err := net.SplitHostPort(r.RemoteAddr); err != nil {
+			return r.RemoteAddr
+		} else {
+			return ip
 		}
 	} else {
 		pieces := strings.SplitN(ip, ",", 2)
